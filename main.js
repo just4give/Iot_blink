@@ -39,16 +39,16 @@ var ledState = false; //Boolean to hold the state of Led
 client.on('message',function(topic,message){
   if(topic == 'techfocus/blink'){
     if(message.toString() ==='ON'){
-      if(ledState == false){
+
         myOnboardLed.write(1);
         ledState=true;
-      }
+
     }
     if(message.toString() ==='OFF'){
-      if(ledState == true){
+
         myOnboardLed.write(0);
         ledState=false;
-      }
+
     }
   }
 })

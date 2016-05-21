@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="led">
+<head>
+    <meta charset="UTF-8">
+    <title>Blink LED</title>
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="margin-top: 40px">
+<div class="container" ng-controller="LEDController">
+    <h3 class="text-center">Control Onboard LED</h3>
+    <div class="row text-center">
+        <button class="btn btn-default" ng-click="turn('on')" ng-class="{'btn-success': ledOn}">ON</button>
+        <button class="btn btn-default" ng-click="turn('off')" ng-class="{'btn-success': !ledOn}">OFF</button>
+    </div>
+</div>
+<script src="jquery/dist/jquery.min.js"></script>
+<script src="angular/angular.min.js"></script>
+<script>
+    angular.module('led',[]);
+
+    angular.module('led').controller('LEDController',['$scope','$http', function($scope,$http){
+
+        $scope.ledOn = false;
+
+        $scope.turn = function(command){
+            $http.get('/led/'+command)
+                    .success(function(data){
+                        if(command === 'on'){
+                            $scope.ledOn = true;
+                        }else{
+                            $scope.ledOn = false;
+                        }
+                    });
+        }
+
+    }])
+
+</script>
+</body>
+</html>

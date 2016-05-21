@@ -1,0 +1,7 @@
+{
+  "name": "LED_Blink",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "bootstrap": "^3.3.6"
+  }
+}

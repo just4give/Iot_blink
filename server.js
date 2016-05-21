@@ -16,8 +16,11 @@ client.on('message',function(topic,message){
 var express = require('express');
 var app = new express();
 var bodyParser = require('body-parser');
+var path = require('path');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'bower_components')));
 
 var port = process.env.PORT || 8600;
 var router = express.Router();
@@ -33,6 +36,9 @@ router.get('/off', function(req, res) {
     res.json({ message: 'LED turned off' });
 });
 
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
 
 app.use('/led', router);
 
